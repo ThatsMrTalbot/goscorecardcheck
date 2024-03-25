@@ -1,0 +1,30 @@
+policies:
+- description: "Must meet minimum score requirement"
+  exclude:
+  # Exclude all go code from scanning
+  - golang.org/**
+  # This does not seem under active development, but it does not really need to
+  # be since it pretty feature complete for what it sets out to achieve
+  - github.com/bmatcuk/doublestar
+  # Both cobra and pflag score pretty low for a number of reasons, but they are
+  # both widely enough used that we should be fine.
+  - github.com/spf13/cobra
+  - github.com/spf13/pflag
+  # There is no scorecard available for the following repos
+  - github.com/go-xmlfmt/xmlfmt
+  - github.com/phayes/checkstyle
+  # This scores low due to lack of active development, but is pretty widely used
+  # so should be fine
+  - gopkg.in/yaml.v3
+  rules:
+  - minimumScore: 7.5
+- description: "No unfixed vulnerabilities"
+  exclude:
+  # Exclude all go code from scanning
+  - golang.org/**
+  # There is no scorecard available for the following repos
+  - github.com/go-xmlfmt/xmlfmt
+  - github.com/phayes/checkstyle
+  rules:
+  - check: Vulnerabilities
+    minimumScore: 10
